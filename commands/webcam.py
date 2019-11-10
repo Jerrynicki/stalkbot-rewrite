@@ -6,23 +6,18 @@ import asyncio
 import os
 
 class Webcam(commands.Cog):
-	def __init__(self, bot, functions):
+	def __init__(self, bot, functions, timeouts):
 		self.bot = bot
 		self.functions = functions
+		self.timeouts = timeouts
 
 	@commands.command(aliases=["wc"])
 	async def webcam(self, ctx):
-		lock = self.bot.locks.add("webcam")
-
-		if lock is False:
-			await ctx.send("The webcam command is already being used!")
-			return
-
-		if self.bot.timeouts.is_timeout("webcam"):
+		if self.timeouts.is_timeout("webcam"):
 			await ctx.message.add_reaction(self.bot.emoji.hourglass)
 			return
 		else:
-			self.bot.timeouts.add("webcam", self.bot.config["timeout"])
+			self.timeouts.add("webcam", self.bot.config["timeout"])
 		
 		try:
 			self.functions.warning_sound()
@@ -47,8 +42,5 @@ class Webcam(commands.Cog):
 			await ctx.message.add_reaction(self.bot.emoji.check_mark)
 			
 		except Exception as exc:
-			ctx.message.add_reaction(self.bot.emoji.cross_mark)
+			await ctx.message.add_reaction(self.bot.emoji.cross_mark)
 			await ctx.send("Error! " + str(type(exc)) + " " + str(exc))
-		finally:
-			self.bot.locks.release("webcam")
-		

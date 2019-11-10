@@ -2,6 +2,7 @@ token
 cam_width
 cam_height
 webcam_delay
+screenshot_blur
 timeout
 prefix
 max_lock_duration
