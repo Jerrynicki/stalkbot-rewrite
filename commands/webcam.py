@@ -20,7 +20,7 @@ class Webcam(commands.Cog):
 			self.timeouts.add("webcam", self.bot.config["timeout"])
 		
 		try:
-			self.functions.warning_sound()
+			await self.functions.warning_sound()
 			
 			pygame.camera.init()
 			cam = pygame.camera.Camera(pygame.camera.list_cameras()[0], (self.bot.config["cam_width"], self.bot.config["cam_height"]))
@@ -29,7 +29,7 @@ class Webcam(commands.Cog):
 			await ctx.message.add_reaction(self.bot.emoji.timer)
 			await asyncio.sleep(self.bot.config["webcam_delay"])
 			await ctx.message.remove_reaction(self.bot.emoji.timer, ctx.message.guild.me)
-			await ctx.message.add_reaction(self.bot.emoji.repeat_button)
+			await ctx.message.add_reaction(self.bot.emoji.outbox_tray)
 
 			img = cam.get_image()
 			pygame.image.save(img, "cache/webcam.png")
@@ -38,7 +38,7 @@ class Webcam(commands.Cog):
 			await ctx.send(content="", file=discord.File("cache/webcam.png"))
 			os.unlink("cache/webcam.png")
 			
-			await ctx.message.remove_reaction(self.bot.emoji.repeat_button, ctx.message.guild.me)
+			await ctx.message.remove_reaction(self.bot.emoji.outbox_tray, ctx.message.guild.me)
 			await ctx.message.add_reaction(self.bot.emoji.check_mark)
 			
 		except Exception as exc:
