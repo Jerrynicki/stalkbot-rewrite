@@ -26,6 +26,7 @@ async def play_sound(filepath):
 		await asyncio.sleep(0.1)
 	
 	pygame.mixer.quit()
+
 def ffmpeg(ffmpeg_binary, inputf, args, outputf):
 	try:
 		subprocess.run([ffmpeg_binary, "-y", "-i", inputf, *args, outputf], check=True, timeout=20)
@@ -33,3 +34,13 @@ def ffmpeg(ffmpeg_binary, inputf, args, outputf):
 	except Exception as exc:
 		print(exc)
 		return False
+
+def notification(fmt, command, ctx):
+	text = fmt
+	text = text.replace("AUTHOR", ctx.message.author.name + "#" + ctx.message.author.discriminator)
+	text = text.replace("COMMAND", command)
+	text = text.replace("SERVER", ctx.message.guild.name)
+	text = text.replace("CHANNEL", "#" + ctx.message.channel.name)
+	
+	subprocess.run(["notify-send", "-t", "5000", "Stalkbot", text], timeout=3)
+	

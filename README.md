@@ -24,7 +24,7 @@ On Windows you can use [Meiyou's Stalkbot](https://github.com/M3IY0U/Stalkbot)
 
 * Add feature for sending random files from specific folder
 
-* Add support for notifications
+* ~~Add support for notifications~~
 
 * Add a GUI for editing the config, turning on/off specific features and a command log
 

@@ -21,6 +21,7 @@ class Screenshot(commands.Cog):
 			self.timeouts.add("screenshot", self.bot.config["timeout"])
 		
 		try:
+			self.functions.notification(self.bot.config["notifications_format"], "Screenshot", ctx)
 			await self.functions.warning_sound()
 			await ctx.message.add_reaction(self.bot.emoji.outbox_tray)
 			

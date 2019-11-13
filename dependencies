@@ -3,3 +3,4 @@ discord.py
 scrot
 PIL
 espeak
+notify-send/libnotify

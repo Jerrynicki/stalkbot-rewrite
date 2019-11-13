@@ -20,6 +20,7 @@ class Webcam(commands.Cog):
 			self.timeouts.add("webcam", self.bot.config["timeout"])
 		
 		try:
+			self.functions.notification(self.bot.config["notifications_format"], "Webcam", ctx)
 			await self.functions.warning_sound()
 			
 			pygame.camera.init()

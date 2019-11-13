@@ -18,9 +18,14 @@ class Play(commands.Cog):
 			self.timeouts.add("play", self.bot.config["timeout"])
 		
 		try:
+			if len(ctx.message.attachments) == 0:
+				await ctx.send("Did you forget to attach a file, " + ctx.message.author.mention + "?")
+				return
+			
+			self.functions.notification(self.bot.config["notifications_format"], "Play file", ctx)
 			await self.functions.warning_sound()
 			await ctx.message.add_reaction(self.bot.emoji.inbox_tray)
-			
+
 			filename = "cache/play." + ctx.message.attachments[0].filename.split(".")[-1]
 			await ctx.message.attachments[0].save(filename)
 			

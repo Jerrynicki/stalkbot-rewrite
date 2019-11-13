@@ -7,3 +7,4 @@ timeout
 prefix
 tts_voice=german
 max_message_length
+notifications_format="AUTHOR: COMMAND | SERVER CHANNEL"
