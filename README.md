@@ -6,6 +6,10 @@ to activate your webcam, take (blurred) screenshots, play sounds,
 
 play TTS messages and more.
 
+### To install:
+* Clone the repository `git clone https://gitlab.com/Jerrynicki/stalkbot-rewrite.git`
+* Run the install.sh file in bash. It will guide you through the installation
+
 ### \*nix only! (only tested on GNU/Linux, but it *should* work on Mac and BSD too)
 
 On Windows you can use [Meiyou's Stalkbot](https://github.com/M3IY0U/Stalkbot)
@@ -14,7 +18,7 @@ On Windows you can use [Meiyou's Stalkbot](https://github.com/M3IY0U/Stalkbot)
 
 ### To-Do:
 
-* Write documentation on how to set up the bot
+* ~~Write documentation on how to set up the bot~~
 
 * ~~Add feature for playing sound files~~
 

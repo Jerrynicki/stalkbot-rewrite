@@ -17,15 +17,17 @@ if not os.path.isdir("cache"):
 
 bot = discord.ext.commands.Bot(command_prefix=config["prefix"], description="Stalkbot")
 
-bot.config = config
 bot.emoji = utils.emojis.Emojis()
 
 timeouts = utils.timeouts.Timeouts()
 
-bot.add_cog(commands.webcam.Webcam(bot, utils.functions, timeouts))
-bot.add_cog(commands.screenshot.Screenshot(bot, utils.functions, timeouts))
-bot.add_cog(commands.tts.TTS(bot, utils.functions, timeouts))
-bot.add_cog(commands.play.Play(bot, utils.functions, timeouts))
+bot.add_cog(commands.webcam.Webcam(bot, config, utils.functions, timeouts))
+bot.add_cog(commands.screenshot.Screenshot(bot, config, utils.functions, timeouts))
+bot.add_cog(commands.tts.TTS(bot, config, utils.functions, timeouts))
+bot.add_cog(commands.play.Play(bot, config, utils.functions, timeouts))
+
+app = utils.gui.App(bot, config)
+app.start()
 
 while True:
 	print("Starting event loop...")

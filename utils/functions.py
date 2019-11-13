@@ -27,9 +27,9 @@ async def play_sound(filepath):
 	
 	pygame.mixer.quit()
 
-def ffmpeg(ffmpeg_binary, inputf, args, outputf):
+def ffmpeg(inputf, args, outputf):
 	try:
-		subprocess.run([ffmpeg_binary, "-y", "-i", inputf, *args, outputf], check=True, timeout=20)
+		subprocess.run(["ffmpeg", "-y", "-i", inputf, *args, outputf], check=True, timeout=20)
 		return True
 	except Exception as exc:
 		print(exc)

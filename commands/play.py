@@ -4,8 +4,9 @@ import asyncio
 import os
 
 class Play(commands.Cog):
-	def __init__(self, bot, functions, timeouts):
+	def __init__(self, bot, config, functions, timeouts):
 		self.bot = bot
+		self.config = config
 		self.functions = functions
 		self.timeouts = timeouts
 
@@ -15,14 +16,14 @@ class Play(commands.Cog):
 			await ctx.message.add_reaction(self.bot.emoji.hourglass)
 			return
 		else:
-			self.timeouts.add("play", self.bot.config["timeout"])
+			self.timeouts.add("play", self.config["timeout"])
 		
 		try:
 			if len(ctx.message.attachments) == 0:
 				await ctx.send("Did you forget to attach a file, " + ctx.message.author.mention + "?")
 				return
 			
-			self.functions.notification(self.bot.config["notifications_format"], "Play file", ctx)
+			self.functions.notification(self.config["notifications_format"], "Play file", ctx)
 			await self.functions.warning_sound()
 			await ctx.message.add_reaction(self.bot.emoji.inbox_tray)
 
@@ -30,8 +31,8 @@ class Play(commands.Cog):
 			await ctx.message.attachments[0].save(filename)
 			
 			if filename.split(".")[-1] != "wav":
-				result = self.functions.ffmpeg(self.bot.config["ffmpeg_location"], filename, ["-af", "volume=-25dB", "-t", \
-											   str(self.bot.config["max_message_length"]), "-ar", "44100", "-ac", "2"], filename + ".wav")
+				result = self.functions.ffmpeg(filename, ["-af", "volume=-25dB", "-t", \
+											   str(self.config["max_message_length"]), "-ar", "44100", "-ac", "2"], filename + ".wav")
 			else:
 				filename = ".".join(filename.split(".")[:-1])
 				result = True

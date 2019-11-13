@@ -6,8 +6,9 @@ import asyncio
 import os
 
 class Webcam(commands.Cog):
-	def __init__(self, bot, functions, timeouts):
+	def __init__(self, bot, config, functions, timeouts):
 		self.bot = bot
+		self.config = config
 		self.functions = functions
 		self.timeouts = timeouts
 
@@ -17,18 +18,18 @@ class Webcam(commands.Cog):
 			await ctx.message.add_reaction(self.bot.emoji.hourglass)
 			return
 		else:
-			self.timeouts.add("webcam", self.bot.config["timeout"])
+			self.timeouts.add("webcam", self.config["timeout"])
 		
 		try:
-			self.functions.notification(self.bot.config["notifications_format"], "Webcam", ctx)
+			self.functions.notification(self.config["notifications_format"], "Webcam", ctx)
 			await self.functions.warning_sound()
 			
 			pygame.camera.init()
-			cam = pygame.camera.Camera(pygame.camera.list_cameras()[0], (self.bot.config["cam_width"], self.bot.config["cam_height"]))
+			cam = pygame.camera.Camera(pygame.camera.list_cameras()[0], (self.config["cam_width"], self.config["cam_height"]))
 			cam.start()
 
 			await ctx.message.add_reaction(self.bot.emoji.timer)
-			await asyncio.sleep(self.bot.config["webcam_delay"])
+			await asyncio.sleep(self.config["webcam_delay"])
 			await ctx.message.remove_reaction(self.bot.emoji.timer, ctx.message.guild.me)
 			await ctx.message.add_reaction(self.bot.emoji.outbox_tray)
 
