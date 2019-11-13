@@ -30,7 +30,9 @@ On Windows you can use [Meiyou's Stalkbot](https://github.com/M3IY0U/Stalkbot)
 
 * ~~Add support for notifications~~
 
-* Add a GUI for editing the config, turning on/off specific features and a command log
+* ~~Add a GUI for editing the config, turning on/off specific features~~
+
+* Add a command log and a user blacklist
 
 Original bot with bad code at https://github.com/Jerrynicki/Stalkbot
 

@@ -42,6 +42,7 @@ read -p "Please input the cooldown/timeout for commands: " timeout
 read -p "Please input your desired bot prefix: " prefix
 read -p "Please input the espeak voice to use (you can get a list by running espeak --voices=[language code]): " tts_voice
 read -p "Please input the maximum length for tts/play commands: " max_message_length
+read -p "Please input a status for the bot to be broadcasting (Playing xyz) (leave empty for none): " status
 
 echo ""
 echo ""
@@ -59,7 +60,7 @@ sleep 3
 
 read -p "Please input the desired format for notifications: " notifications_format
 
-echo "{\"token\": \"$token\", \"cam_width\": $cam_width, \"cam_height\": $cam_height, \"webcam_delay\": $webcam_delay, \"screenshot_blur\": $screenshot_blur, \"timeout\": $timeout, \"prefix\": \"$prefix\", \"tts_voice\": \"$tts_voice\", \"max_message_length\": $max_message_length, \"notifications_format\": \"$notifications_format\"}" > config.json
+echo "{\"token\": \"$token\", \"cam_width\": $cam_width, \"cam_height\": $cam_height, \"webcam_delay\": $webcam_delay, \"screenshot_blur\": $screenshot_blur, \"timeout\": $timeout, \"prefix\": \"$prefix\", \"tts_voice\": \"$tts_voice\", \"max_message_length\": $max_message_length, \"notifications_format\": \"$notifications_format\", \"status\": \"$status\"}" > config.json
 
 echo "Config has been written."
 echo ""

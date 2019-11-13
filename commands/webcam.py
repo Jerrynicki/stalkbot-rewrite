@@ -6,9 +6,10 @@ import asyncio
 import os
 
 class Webcam(commands.Cog):
-	def __init__(self, bot, config, functions, timeouts):
+	def __init__(self, bot, config, features_toggle, functions, timeouts):
 		self.bot = bot
 		self.config = config
+		self.features_toggle = features_toggle
 		self.functions = functions
 		self.timeouts = timeouts
 
@@ -19,6 +20,10 @@ class Webcam(commands.Cog):
 			return
 		else:
 			self.timeouts.add("webcam", self.config["timeout"])
+		
+		if not self.features_toggle["webcam"]:
+			await ctx.message.add_reaction(self.bot.emoji.no_bell)
+			return
 		
 		try:
 			self.functions.notification(self.config["notifications_format"], "Webcam", ctx)
