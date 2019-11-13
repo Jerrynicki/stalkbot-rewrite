@@ -16,17 +16,17 @@ On Windows you can use [Meiyou's Stalkbot](https://github.com/M3IY0U/Stalkbot)
 
 * Write documentation on how to set up the bot
 
-* Add feature for playing sound files
+* ~~Add feature for playing sound files~~
 
 * Add feature for retrieving a list of processes with the must CPU/RAM usage
 
-* Add feature for getting the current focused windows
+* Add feature for getting the current focused window
 
 * Add feature for sending random files from specific folder
 
 * Add support for notifications
 
-* Add GUI for editing the config, turning on/off specific features and a command log
+* Add a GUI for editing the config, turning on/off specific features and a command log
 
 Original bot with bad code at https://github.com/Jerrynicki/Stalkbot
 

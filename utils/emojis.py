@@ -7,6 +7,7 @@ class Emojis():
 		self.cross_mark = "\U0000274E" # error
 		self.no_entry = "\U000026D4" # permission denied (blacklisting users coming soon(tm))
 		self.outbox_tray = "\U0001F4E4" # uploading file
+		self.inbox_tray = "\U0001F4E5" # downloading a file
 		self.no_bell = "\U0001F515" # function turned off (coming soon(tm))
 		self.hourglass = "\U000023F3" # timeout
 		self.timer = "\U000023F2" # delay (webcam)

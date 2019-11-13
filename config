@@ -5,6 +5,5 @@ webcam_delay
 screenshot_blur
 timeout
 prefix
-max_lock_duration
 tts_voice=german
 max_message_length

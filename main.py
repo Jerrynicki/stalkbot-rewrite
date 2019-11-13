@@ -25,6 +25,7 @@ timeouts = utils.timeouts.Timeouts()
 bot.add_cog(commands.webcam.Webcam(bot, utils.functions, timeouts))
 bot.add_cog(commands.screenshot.Screenshot(bot, utils.functions, timeouts))
 bot.add_cog(commands.tts.TTS(bot, utils.functions, timeouts))
+bot.add_cog(commands.play.Play(bot, utils.functions, timeouts))
 
 while True:
 	print("Starting event loop...")
