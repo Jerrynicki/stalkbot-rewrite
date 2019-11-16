@@ -21,6 +21,7 @@ For a stable bot on Windows you can use [Meiyou's Stalkbot](https://github.com/M
 * Navigate to the folder you put the repository in and double-click the windows_installer.py file to guide you through the installation
 * After installing you can double-click the main.py to start the bot
 
+If you need help creating a bot account/getting a token, please refer to [this guide](https://discordpy.readthedocs.io/en/latest/discord.html)
 
 ### **In development!**
 
