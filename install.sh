@@ -8,7 +8,6 @@ sleep 3
 
 echo "First, please make sure the following packages are installed on your system and on your PATH: "
 echo "scrot"
-echo "espeak"
 echo "notify-send / libnotify"
 echo "pip3 / python3-pip"
 echo "Tkinter for Python 3 / python3-tk"
@@ -20,7 +19,7 @@ read -p "Press Enter if you have made sure that these packages are installed.  "
 echo ""
 echo "Installing required pip packages..."
 
-pip3 install pygame discord.py Pillow
+pip3 install pygame discord.py Pillow gTTS
 
 echo ""
 echo "Now to set up your bot config."
@@ -40,7 +39,7 @@ read -p "Please input the desired delay before taking a picture when the webcam 
 read -p "Please input the desired amount of blur when taking screenshots: " screenshot_blur
 read -p "Please input the cooldown/timeout for commands: " timeout
 read -p "Please input your desired bot prefix: " prefix
-read -p "Please input the espeak voice to use (you can get a list by running espeak --voices=[language code]): " tts_voice
+read -p "Please input the text-to-speech voice to use (Google TTS, e.g. 'en' for English, 'de' for German): " tts_voice
 read -p "Please input the maximum length for tts/play commands: " max_message_length
 read -p "Please input a status for the bot to be broadcasting (Playing xyz) (leave empty for none): " status
 

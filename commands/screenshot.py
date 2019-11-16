@@ -13,7 +13,7 @@ class Screenshot(commands.Cog):
 		self.features_toggle = features_toggle
 		self.functions = functions
 		self.timeouts = timeouts
-
+		
 	@commands.command(aliases=["ss"])
 	async def screenshot(self, ctx):
 		if self.timeouts.is_timeout("screenshot"):
@@ -30,15 +30,20 @@ class Screenshot(commands.Cog):
 			self.functions.notification(self.config["notifications_format"], "Screenshot", ctx)
 			await self.functions.warning_sound()
 			await ctx.message.add_reaction(self.bot.emoji.outbox_tray)
-			
-			scrot = subprocess.run(["scrot", "cache/screenshot.png", "--overwrite"], check=True, timeout=5)
 
-			img = Image.open("cache/screenshot.png")
+			if not self.bot.windows:
+				scrot = subprocess.run(["scrot", "cache/screenshot.png", "--overwrite"], check=True, timeout=5)
+				img = Image.open("cache/screenshot.png")
+			else:
+				from PIL import ImageGrab
+				img = ImageGrab.grab()
+	
 			img = img.filter(ImageFilter.GaussianBlur(self.config["screenshot_blur"]))
 			img.save("cache/screenshot_blurred.png")
 			
 			await ctx.send(content="", file=discord.File("cache/screenshot_blurred.png"))
-			os.unlink("cache/screenshot.png")
+			if os.path.isfile("cache/screenshot.png"):
+				os.unlink("cache/screenshot.png")
 			os.unlink("cache/screenshot_blurred.png")
 			
 			await ctx.message.remove_reaction(self.bot.emoji.outbox_tray, ctx.message.guild.me)

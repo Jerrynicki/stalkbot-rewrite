@@ -4,6 +4,7 @@ import logging
 import json
 import asyncio
 import os
+import sys
 
 import commands
 import utils
@@ -34,8 +35,21 @@ if not os.path.isdir("cache"):
 bot = discord.ext.commands.Bot(command_prefix=config["prefix"], description="Stalkbot")
 
 bot.emoji = utils.emojis.Emojis()
-
 timeouts = utils.timeouts.Timeouts()
+
+if "win" in sys.platform.lower():
+	bot.windows = True
+else:
+	bot.windows = False
+
+if bot.windows:
+	utils.functions.init("ffmpeg.exe", "windows")
+else:
+	utils.functions.init("ffmpeg", "other")
+
+if os.path.isfile("ffmpeg_override.txt"):
+	functions.init(open("ffmpeg_override.txt", "r").read().replace("\n", ""))
+
 
 bot.add_cog(commands.webcam.Webcam(bot, config, features_toggle, utils.functions, timeouts))
 bot.add_cog(commands.screenshot.Screenshot(bot, config, features_toggle, utils.functions, timeouts))
