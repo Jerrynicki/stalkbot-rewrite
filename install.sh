@@ -24,7 +24,7 @@ pip3 install pygame discord.py Pillow gTTS
 echo ""
 echo "Now to set up your bot config."
 echo "The options will be written to the file config.json. You can change them later."
-echo "A GUI interface to change the config will also be added in the near future."
+echo "All time values are in seconds."
 
 sleep 5
 

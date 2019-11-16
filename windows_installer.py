@@ -9,7 +9,8 @@ input("Press enter if the installation was successful.")
 
 print("""Now to set up your bot config.
 The options will be written to the file config.json. You can change them later.
-A GUI interface to change the config will also be added in the near future.""")
+
+All time values are in seconds.""")
 
 # token cam_width cam_height webcam_delay screenshot_blur timeout prefix tts_voice max_message_length status notifications_format
 
