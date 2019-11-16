@@ -16,7 +16,7 @@ For a stable bot on Windows you can use [Meiyou's Stalkbot](https://github.com/M
 
 ### To install (Windows):
 * Clone the repository or [download as zip](https://gitlab.com/Jerrynicki/stalkbot-rewrite/-/archive/master/stalkbot-rewrite-master.zip)
-* Download and install Python3 from [python.org](https://python.org) (Make sure to select custom install and select tkinter and add it to your PATH!)
+* Download and install Python3 (>=3.6) from [python.org](https://python.org) (Make sure to select custom install and select tkinter and add it to your PATH!)
 * Download an [ffmpeg binary](https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-4.2.1-win32-static.zip) and put the ffmpeg.exe in the same folder as the main.py
 * Navigate to the folder you put the repository in and double-click the windows_installer.py file to guide you through the installation
 * After installing you can double-click the main.py to start the bot
