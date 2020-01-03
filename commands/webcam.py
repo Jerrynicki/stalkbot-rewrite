@@ -13,7 +13,7 @@ class Webcam(commands.Cog):
 		self.functions = functions
 		self.timeouts = timeouts
 
-	@commands.command(aliases=["wc"])
+	@commands.command(aliases=["wc", ":toilet:"])
 	async def webcam(self, ctx):
 		if self.timeouts.is_timeout("webcam"):
 			await ctx.message.add_reaction(self.bot.emoji.hourglass)
@@ -32,6 +32,7 @@ class Webcam(commands.Cog):
 			pygame.camera.init()
 			cam = pygame.camera.Camera(pygame.camera.list_cameras()[0], (self.config["cam_width"], self.config["cam_height"]))
 			cam.start()
+			img = cam.get_image()
 
 			await ctx.message.add_reaction(self.bot.emoji.timer)
 			await asyncio.sleep(self.config["webcam_delay"])

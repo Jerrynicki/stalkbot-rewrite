@@ -59,7 +59,9 @@ sleep 3
 
 read -p "Please input the desired format for notifications: " notifications_format
 
-echo "{\"token\": \"$token\", \"cam_width\": $cam_width, \"cam_height\": $cam_height, \"webcam_delay\": $webcam_delay, \"screenshot_blur\": $screenshot_blur, \"timeout\": $timeout, \"prefix\": \"$prefix\", \"tts_voice\": \"$tts_voice\", \"max_message_length\": $max_message_length, \"notifications_format\": \"$notifications_format\", \"status\": \"$status\"}" > config.json
+read -p "Please input a folder for the folder command: " folder
+
+echo "{\"token\": \"$token\", \"cam_width\": $cam_width, \"cam_height\": $cam_height, \"webcam_delay\": $webcam_delay, \"screenshot_blur\": $screenshot_blur, \"timeout\": $timeout, \"prefix\": \"$prefix\", \"tts_voice\": \"$tts_voice\", \"max_message_length\": $max_message_length, \"notifications_format\": \"$notifications_format\", \"status\": \"$status\", \"folder\": \"$folder\"}" > config.json
 
 echo "Config has been written."
 echo ""

@@ -35,7 +35,7 @@ If you need help creating a bot account/getting a token, please refer to [this g
 
 * Add feature for getting the current focused window
 
-* Add feature for sending random files from specific folder
+* ~~Add feature for sending random files from specific folder~~
 
 * ~~Add support for notifications~~
 

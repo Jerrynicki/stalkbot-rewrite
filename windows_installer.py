@@ -40,8 +40,9 @@ Which would produce the following output when Flexis sends a screenshot command 
 Flexis#1234: Screenshot | Supermarkt #bots""")
 
 notifications_format = input("Please input the desired format for notifications: ")
+folder = input("Please input a folder for the folder command: ")
 
-config = {"token": token, "cam_width": cam_width, "cam_height": cam_height, "webcam_delay": webcam_delay, "screenshot_blur": screenshot_blur, "timeout": timeout, "prefix": prefix, "tts_voice": tts_voice, "max_message_length": max_message_length, "status": status, "notifications_format": notifications_format}
+config = {"token": token, "cam_width": cam_width, "cam_height": cam_height, "webcam_delay": webcam_delay, "screenshot_blur": screenshot_blur, "timeout": timeout, "prefix": prefix, "tts_voice": tts_voice, "max_message_length": max_message_length, "status": status, "notifications_format": notifications_format, "folder": folder}
 json.dump(config, open("config.json", "w"))
 
 print("Success! You can now run the bot.")

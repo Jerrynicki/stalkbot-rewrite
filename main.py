@@ -55,6 +55,7 @@ bot.add_cog(commands.webcam.Webcam(bot, config, features_toggle, utils.functions
 bot.add_cog(commands.screenshot.Screenshot(bot, config, features_toggle, utils.functions, timeouts))
 bot.add_cog(commands.tts.TTS(bot, config, features_toggle, utils.functions, timeouts))
 bot.add_cog(commands.play.Play(bot, config, features_toggle, utils.functions, timeouts))
+bot.add_cog(commands.folder.Folder(bot, config, features_toggle, utils.functions, timeouts))
 
 bot.loop.create_task(update_status())
 
