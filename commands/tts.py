@@ -35,7 +35,7 @@ class TTS(commands.Cog):
 			
 			tts = gTTS(ctx.message.author.name + ": " + text, lang=self.config["tts_voice"])
 			tts.save("cache/tts.mp3")
-			self.functions.ffmpeg("cache/tts.mp3", ["-ar", "44100", "-ac", "2"], "cache/tts.wav")
+			self.functions.ffmpeg("cache/tts.mp3", ["-ar", "44100", "-ac", "2", "-t", str(self.config["max_message_length"])], "cache/tts.wav")
 			await self.functions.play_sound("cache/tts.wav")
 
 			os.unlink("cache/tts.mp3")
