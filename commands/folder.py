@@ -29,6 +29,11 @@ class Folder(commands.Cog):
 
 			if os.stat(full_path).st_size < 8*1024*1024:
 				found_file = True
+				await ctx.message.add_reaction(self.bot.emoji.outbox_tray)
+
 				self.functions.notification(self.config["notifications_format"], "Folder: " + file, ctx)
 				await self.functions.warning_sound()
-				await ctx.send(content="", file=discord.File(fp=full_path))
+				
+				
+				await ctx.send(content=file, file=discord.File(fp=full_path))
+				await ctx.message.remove_reaction(self.bot.emoji.outbox_tray, ctx.message.guild.me)
