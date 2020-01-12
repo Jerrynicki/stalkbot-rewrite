@@ -2,14 +2,16 @@ import discord
 import discord.ext.commands as commands
 import asyncio
 import os
+import time
 
 class Play(commands.Cog):
-	def __init__(self, bot, config, features_toggle, functions, timeouts):
+	def __init__(self, bot, config, features_toggle, functions, timeouts, command_log):
 		self.bot = bot
 		self.config = config
 		self.features_toggle = features_toggle
 		self.functions = functions
 		self.timeouts = timeouts
+		self.command_log = command_log
 
 	@commands.command()
 	async def play(self, ctx):
@@ -30,6 +32,7 @@ class Play(commands.Cog):
 			
 			self.functions.notification(self.config["notifications_format"], "Play file", ctx)
 			await self.functions.warning_sound()
+			self.command_log.append((time.time(), ctx, "Play: " + ctx.message.attachments[0].filename))
 			await ctx.message.add_reaction(self.bot.emoji.inbox_tray)
 
 			filename = "cache/play." + ctx.message.attachments[0].filename.split(".")[-1]

@@ -1,12 +1,14 @@
 import threading
 import json
 import tkinter as tk
+import time
 
 class App():
-	def __init__(self, bot, config, features_toggle):
+	def __init__(self, bot, config, features_toggle, command_log):
 		self.bot = bot
 		self.config = config
 		self.features_toggle = features_toggle
+		self.command_log = command_log
 		
 	def _start(self):
 		self.root = tk.Tk()
@@ -17,6 +19,7 @@ class App():
 		self.ping = tk.Label(self.root, text="ping", font=("Helvetica", 14))
 		
 		self.edit_config_button = tk.Button(self.root, text="Edit config", font=("Helvetica", 18), command=self.edit_config)
+		self.view_log_button = tk.Button(self.root, text="View command log", font=("Helvetica", 18), command=self.view_log)
 		
 		self.feature_buttons = list()
 		
@@ -29,6 +32,7 @@ class App():
 		self.online_status.pack()
 		self.ping.pack()
 		self.edit_config_button.pack()
+		self.view_log_button.pack()
 		for button in self.feature_buttons:
 			button.pack()
 
@@ -87,4 +91,30 @@ class App():
 		json.dump(self.config, open("config.json", "w"))
 
 		root.destroy()
+		
+	def view_log(self):
+		root = tk.Tk()
+		root.title("Stalkbot Command Log")
+		
+		listbox = tk.Listbox(root, width=120, height=10)
+		close = tk.Button(root, text="Close", font=("Helvetica", 18), command=root.destroy)
+		close.pack()
+		listbox.pack()
+		
+		while True:
+			cur_time = time.time()
+			listbox.delete(0, tk.END)
+			for x in self.command_log:
+				ctx = x[1]
+				text = self.config["notifications_format"]
+				text = text.replace("AUTHOR", ctx.message.author.name + "#" + ctx.message.author.discriminator)
+				text = text.replace("COMMAND", x[2])
+				text = text.replace("SERVER", ctx.message.guild.name)
+				text = text.replace("CHANNEL", "#" + ctx.message.channel.name)
+				text += " | " + str(int((cur_time-x[0])//60)) + "m" + str(int((cur_time-x[0]) % 60)) + "s ago"
+				listbox.insert(tk.END, text)
+
+			root.update()
+			time.sleep(0.5)
+
 		

@@ -3,16 +3,18 @@ import discord.ext.commands as commands
 import asyncio
 import os
 import subprocess
+import time
 
 from PIL import Image, ImageFilter
 
 class Screenshot(commands.Cog):
-	def __init__(self, bot, config, features_toggle, functions, timeouts):
+	def __init__(self, bot, config, features_toggle, functions, timeouts, command_log):
 		self.bot = bot
 		self.config = config
 		self.features_toggle = features_toggle
 		self.functions = functions
 		self.timeouts = timeouts
+		self.command_log = command_log
 		
 	@commands.command(aliases=["ss"])
 	async def screenshot(self, ctx):
@@ -29,6 +31,7 @@ class Screenshot(commands.Cog):
 		try:
 			self.functions.notification(self.config["notifications_format"], "Screenshot", ctx)
 			await self.functions.warning_sound()
+			self.command_log.append((time.time(), ctx, "Screenshot"))
 			await ctx.message.add_reaction(self.bot.emoji.outbox_tray)
 
 			if not self.bot.windows:
@@ -48,7 +51,6 @@ class Screenshot(commands.Cog):
 			
 			await ctx.message.remove_reaction(self.bot.emoji.outbox_tray, ctx.message.guild.me)
 			await ctx.message.add_reaction(self.bot.emoji.check_mark)
-			
 		except Exception as exc:
 			await ctx.message.add_reaction(self.bot.emoji.cross_mark)
 			await ctx.send("Error! " + str(type(exc)) + " " + str(exc))

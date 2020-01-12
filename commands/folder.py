@@ -3,14 +3,16 @@ import discord.ext.commands as commands
 import asyncio
 import os
 import random
+import time
 
 class Folder(commands.Cog):
-	def __init__(self, bot, config, features_toggle, functions, timeouts):
+	def __init__(self, bot, config, features_toggle, functions, timeouts, command_log):
 		self.bot = bot
 		self.config = config
 		self.features_toggle = features_toggle
 		self.functions = functions
 		self.timeouts = timeouts
+		self.command_log = command_log
 
 	@commands.command()
 	async def folder(self, ctx):
@@ -33,6 +35,7 @@ class Folder(commands.Cog):
 
 				self.functions.notification(self.config["notifications_format"], "Folder: " + file, ctx)
 				await self.functions.warning_sound()
+				self.command_log.append((time.time(), ctx, "Folder: " + file))
 				
 				
 				await ctx.send(content=file, file=discord.File(fp=full_path))

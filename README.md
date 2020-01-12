@@ -41,7 +41,7 @@ If you need help creating a bot account/getting a token, please refer to [this g
 
 * ~~Add a GUI for editing the config, turning on/off specific features~~
 
-* Add a command log and a user blacklist
+* ~~Add a command log~~ and a user blacklist
 
 Original bot with bad code at https://github.com/Jerrynicki/Stalkbot
 
