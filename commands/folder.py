@@ -19,6 +19,12 @@ class Folder(commands.Cog):
 		if "folder" not in self.config or self.config["folder"] == "":
 			await ctx.send("The bot owner has not set a folder for this command")
 			return
+			
+		if self.timeouts.is_timeout("folder"):
+			await ctx.message.add_reaction(self.bot.emoji.hourglass)
+			return
+		else:
+			self.timeouts.add("folder", self.config["timeout"])
 		
 		files = os.listdir(self.config["folder"])
 		found_file = False
