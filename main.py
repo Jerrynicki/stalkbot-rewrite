@@ -43,7 +43,7 @@ config = json.load(open("config.json"))
 try:
 	features_toggle = json.load(open("features_toggle.json"))
 except:
-	features_toggle = {"screenshot": True, "webcam": True, "tts": True, "play": True}
+	features_toggle = {"screenshot": True, "webcam": True, "tts": True, "play": True, "proc": True}
 	json.dump(features_toggle, open("features_toggle.json", "w"))
 
 if not os.path.isdir("cache"):
@@ -74,6 +74,7 @@ bot.add_cog(commands.screenshot.Screenshot(bot, config, features_toggle, utils.f
 bot.add_cog(commands.tts.TTS(bot, config, features_toggle, utils.functions, timeouts, command_log))
 bot.add_cog(commands.play.Play(bot, config, features_toggle, utils.functions, timeouts, command_log))
 bot.add_cog(commands.folder.Folder(bot, config, features_toggle, utils.functions, timeouts, command_log))
+bot.add_cog(commands.proc.Proc(bot, config, features_toggle, utils.functions, timeouts, command_log))
 
 bot.loop.create_task(update_status())
 bot.loop.create_task(clear_command_log())

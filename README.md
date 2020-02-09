@@ -6,6 +6,8 @@ to activate your webcam, take (blurred) screenshots, play sounds,
 
 play TTS messages and more.
 
+* Note: If a new feature was recently added and you're missing the toggle in the control panel for it, delete the file "features_toggle.json" and restart the bot
+
 ### Cross-platform, although Windows support is still WIP
 
 For a stable bot on Windows you can use [Meiyou's Stalkbot](https://github.com/M3IY0U/Stalkbot)
@@ -31,7 +33,7 @@ If you need help creating a bot account/getting a token, please refer to [this g
 
 * ~~Add feature for playing sound files~~
 
-* Add feature for retrieving a list of processes with the must CPU/RAM usage
+* ~~Add feature for retrieving a list of processes with the must CPU/RAM usage~~
 
 * Add feature for getting the current focused window
 
