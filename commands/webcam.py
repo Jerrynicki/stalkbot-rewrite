@@ -33,18 +33,22 @@ class Webcam(commands.Cog):
 			self.command_log.append((time.time(), ctx, "Webcam"))
 			
 			pygame.camera.init()
-			cam = pygame.camera.Camera(pygame.camera.list_cameras()[0], (self.config["cam_width"], self.config["cam_height"]))
-			cam.start()
-			img = cam.get_image()
 
 			await ctx.message.add_reaction(self.bot.emoji.timer)
 			await asyncio.sleep(self.config["webcam_delay"])
+			
 			await ctx.message.remove_reaction(self.bot.emoji.timer, ctx.message.guild.me)
-			await ctx.message.add_reaction(self.bot.emoji.outbox_tray)
+			await ctx.message.add_reaction(self.bot.emoji.repeat_button)
 
+			cam = pygame.camera.Camera(pygame.camera.list_cameras()[0], (self.config["cam_width"], self.config["cam_height"]))
+			cam.start()
+			img = cam.get_image()
 			img = cam.get_image()
 			pygame.image.save(img, "cache/webcam.png")
 			cam.stop()
+			
+			await ctx.message.remove_reaction(self.bot.emoji.repeat_button, ctx.message.guild.me)
+			await ctx.message.add_reaction(self.bot.emoji.outbox_tray)
 			
 			await ctx.send(content="", file=discord.File("cache/webcam.png"))
 			os.unlink("cache/webcam.png")
