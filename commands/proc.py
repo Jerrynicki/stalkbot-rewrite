@@ -33,6 +33,7 @@ class Proc(commands.Cog):
 			ramlist = list()
 			cpulist = list()
 			cpu_cores = psutil.cpu_count()
+			cpu_total = psutil.cpu_percent() # returns 0.0
 			
 			for proc in psutil.process_iter(attrs=["name", "memory_full_info"]):
 				try:
@@ -63,13 +64,18 @@ class Proc(commands.Cog):
 			ramlist = ramlist[:10]
 			cpulist = cpulist[:10]
 			
-			message = "RAM:\n"
+			cpu_total = psutil.cpu_percent() # returns an actual value
+			memory = psutil.virtual_memory()
+			
+			message = "**RAM** (" + str(round((memory.total - memory.available) / 1024 / 1024, 1))  + " MiB / " + str(round(memory.total / 1024 / 1024, 1)) + " MiB):\n```"
 			for item in ramlist:
 				message += str(item[0]) + " MiB | " + item[1] + "\n"
 
-			message += "\nCPU:\n"
+			message += "```\n**CPU** (" + str(round(cpu_total, 1)) + "%):\n```"
 			for item in cpulist:
 				message += str(item[0]) + "% | " + item[1] + "\n"
+				
+			message += "```"
 			
 			await ctx.send(message)
 			

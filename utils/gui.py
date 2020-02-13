@@ -115,6 +115,6 @@ class App():
 				listbox.insert(tk.END, text)
 
 			root.update()
-			time.sleep(0.5)
+			time.sleep(0.1)
 
 		
