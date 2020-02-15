@@ -67,7 +67,7 @@ class Proc(commands.Cog):
 			cpu_total = psutil.cpu_percent() # returns an actual value
 			memory = psutil.virtual_memory()
 			
-			message = "**RAM** (" + str(round((memory.total - memory.available) / 1024 / 1024, 1))  + " MiB / " + str(round(memory.total / 1024 / 1024, 1)) + " MiB):\n```"
+			message = "**RAM** (" + str(round(memory.used / 1024 / 1024, 1))  + " MiB / " + str(round(memory.total / 1024 / 1024, 1)) + " MiB):\n```"
 			for item in ramlist:
 				message += str(item[0]) + " MiB | " + item[1] + "\n"
 
