@@ -45,7 +45,7 @@ class Proc(commands.Cog):
 				except:
 					pass
 					
-			await asyncio.sleep(0.5)
+			await asyncio.sleep(2)
 			
 			# call for cpu usage a second time to get an actual value
 			for proc in psutil.process_iter(attrs=["name"]):
