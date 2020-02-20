@@ -16,7 +16,7 @@ async def update_status():
 			if config["status"] == "":
 				continue
 			await bot.wait_until_ready()
-			await bot.change_presence(status=discord.Game(name=config["status"]))
+			await bot.change_presence(activity=discord.Game(name=config["status"]))
 			await asyncio.sleep(15)
 		except Exception as exc:
 			print("update_status(): " + repr(exc))
