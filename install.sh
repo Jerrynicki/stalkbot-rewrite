@@ -19,7 +19,7 @@ read -p "Press Enter if you have made sure that these packages are installed.  "
 echo ""
 echo "Installing required pip packages..."
 
-pip3 install pygame discord.py Pillow gTTS
+pip3 install pygame discord.py Pillow gTTS requests
 
 echo ""
 echo "Now to set up your bot config."

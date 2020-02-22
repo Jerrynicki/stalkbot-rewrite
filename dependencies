@@ -4,3 +4,4 @@ scrot
 PIL
 espeak
 notify-send/libnotify
+requests

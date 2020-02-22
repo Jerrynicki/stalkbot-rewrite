@@ -82,6 +82,4 @@ bot.loop.create_task(clear_command_log())
 app = utils.gui.App(bot, config, features_toggle, command_log)
 app.start()
 
-while True:
-	print("Starting event loop...")
-	asyncio.get_event_loop().run_until_complete(bot.start(config["token"]))
+bot.run(config["token"])
