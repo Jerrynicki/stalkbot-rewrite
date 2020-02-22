@@ -40,7 +40,7 @@ class Play(commands.Cog):
 			
 			if filename.split(".")[-1] != "wav":
 				result = self.functions.ffmpeg(filename, ["-af", "volume=-25dB,loudnorm=tp=0", "-t", \
-											   str(self.config["max_message_length"]), "-ar", "44100", "-ac", "2"], filename + ".wav")
+											   str(self.config["max_message_length"]), "-ar", "44100", "-ac", "2"], filename + "_converted.wav")
 			else:
 				filename = ".".join(filename.split(".")[:-1])
 				result = True
@@ -52,12 +52,12 @@ class Play(commands.Cog):
 			
 			await ctx.message.add_reaction(self.bot.emoji.play)
 			
-			await self.functions.play_sound(filename + ".wav")
+			await self.functions.play_sound(filename + "_converted.wav")
 			await ctx.message.remove_reaction(self.bot.emoji.play, ctx.message.guild.me)
 			await ctx.message.add_reaction(self.bot.emoji.check_mark)
 			
 			os.unlink(filename)
-			os.unlink(filename + ".wav")
+			os.unlink(filename + "_converted.wav")
 			
 		except Exception as exc:
 			await ctx.message.add_reaction(self.bot.emoji.cross_mark)
