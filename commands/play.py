@@ -39,7 +39,7 @@ class Play(commands.Cog):
 			await ctx.message.attachments[0].save(filename)
 			
 			if filename.split(".")[-1] != "wav":
-				result = self.functions.ffmpeg(filename, ["-af", "volume=-25dB", "-t", \
+				result = self.functions.ffmpeg(filename, ["-af", "volume=-25dB,loudnorm=tp=0", "-t", \
 											   str(self.config["max_message_length"]), "-ar", "44100", "-ac", "2"], filename + ".wav")
 			else:
 				filename = ".".join(filename.split(".")[:-1])
