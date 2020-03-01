@@ -22,6 +22,8 @@ class App():
 		self.edit_config_button = tk.Button(self.root, text="Edit config", font=("Helvetica", 18), command=self.edit_config)
 		self.view_log_button = tk.Button(self.root, text="View command log", font=("Helvetica", 18), command=self.view_log)
 		
+		self.delete_last_message_button = tk.Button(self.root, text="Delete last message", font=("Helvetica", 18), command=self.delete_last_message)
+		
 		self.feature_buttons = list()
 		
 		i = 0
@@ -34,6 +36,7 @@ class App():
 		self.ping.pack()
 		self.edit_config_button.pack()
 		self.view_log_button.pack()
+		self.delete_last_message_button.pack()
 		for button in self.feature_buttons:
 			button.pack()
 
@@ -118,4 +121,5 @@ class App():
 			root.update()
 			time.sleep(0.1)
 
-		
+	def delete_last_message(self):
+		self.bot.delete_last = True

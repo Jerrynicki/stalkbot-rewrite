@@ -37,6 +37,24 @@ async def clear_command_log():
 		except Exception as exc:
 			print("clear_command_log(): " + repr(exc))
 
+async def delete_last_loop():
+	global bot
+	while True:
+		try:
+			if bot.last_own_message == None:
+				app.delete_last_message_button.config(state="disabled")
+			else:
+				app.delete_last_message_button.config(state="normal")
+
+			if bot.delete_last:
+				bot.delete_last = False
+				await bot.last_own_message.delete()
+				bot.last_own_message = None
+
+			await asyncio.sleep(2)
+		except Exception as exc:
+			print("delete_last_loop(): " + repr(exc))
+
 logging.basicConfig(level=logging.INFO)
 
 config = json.load(open("config.json"))
@@ -67,8 +85,17 @@ else:
 
 if os.path.isfile("ffmpeg_override.txt"):
 	functions.init(open("ffmpeg_override.txt", "r").read().replace("\n", ""))
+		
+@bot.event
+async def on_message(message):
+	global bot
+	if message.author.id == bot.user.id:
+		bot.last_own_message = message
+	elif not message.author.bot:
+		await bot.process_commands(message)
 
-
+bot.last_own_message = None
+bot.delete_last = False
 bot.add_cog(commands.webcam.Webcam(bot, config, features_toggle, utils.functions, timeouts, command_log))
 bot.add_cog(commands.screenshot.Screenshot(bot, config, features_toggle, utils.functions, timeouts, command_log))
 bot.add_cog(commands.tts.TTS(bot, config, features_toggle, utils.functions, timeouts, command_log))
@@ -81,5 +108,7 @@ bot.loop.create_task(clear_command_log())
 
 app = utils.gui.App(bot, config, features_toggle, command_log)
 app.start()
+
+bot.loop.create_task(delete_last_loop())
 
 bot.run(config["token"])
