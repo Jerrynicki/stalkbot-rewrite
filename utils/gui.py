@@ -13,6 +13,7 @@ class App():
 	def _start(self):
 		self.root = tk.Tk()
 		self.root.title("Stalkbot Control Panel")
+		self.root.iconphoto(True, tk.PhotoImage(file="icon.png"))
 				
 		self.title = tk.Label(self.root, text="Stalkbot Control Panel", font=("Helvetica", 24))
 		self.online_status = tk.Label(self.root, text="status", font=("Helvetica", 14))
