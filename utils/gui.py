@@ -4,11 +4,12 @@ import tkinter as tk
 import time
 
 class App():
-	def __init__(self, bot, config, features_toggle, command_log):
+	def __init__(self, bot, config, features_toggle, command_log, blacklist):
 		self.bot = bot
 		self.config = config
 		self.features_toggle = features_toggle
 		self.command_log = command_log
+		self.user_blacklist = blacklist
 		
 	def _start(self):
 		self.root = tk.Tk()
@@ -24,6 +25,8 @@ class App():
 		
 		self.delete_last_message_button = tk.Button(self.root, text="Delete last message", font=("Helvetica", 18), command=self.delete_last_message)
 		
+		self.blacklist_button = tk.Button(self.root, text="User blacklist", font=("Helvetica", 18), command=self.blacklist)
+		
 		self.feature_buttons = list()
 		
 		i = 0
@@ -37,6 +40,7 @@ class App():
 		self.edit_config_button.pack()
 		self.view_log_button.pack()
 		self.delete_last_message_button.pack()
+		self.blacklist_button.pack()
 		for button in self.feature_buttons:
 			button.pack()
 
@@ -100,7 +104,7 @@ class App():
 		root = tk.Tk()
 		root.title("Stalkbot Command Log")
 		
-		listbox = tk.Listbox(root, width=120, height=10)
+		listbox = tk.Listbox(root, width=90, height=10)
 		close = tk.Button(root, text="Close", font=("Helvetica", 18), command=root.destroy)
 		close.pack()
 		listbox.pack()
@@ -120,6 +124,48 @@ class App():
 
 			root.update()
 			time.sleep(0.1)
+			
+	def blacklist(self):
+		def update_listbox():
+			listbox.delete(0, tk.END)
+			for x in self.user_blacklist:
+				listbox.insert(0, x)
+			
+		def add():
+			self.user_blacklist.append(entry.get() + "#" + entry2.get())
+			entry.delete(0, tk.END)
+			entry2.delete(0, tk.END)
+			update_listbox()
+			
+			json.dump(self.user_blacklist, open("blacklist.json", "w"))
+			
+		def remove():
+			del self.user_blacklist[listbox.curselection()[0]]
+			update_listbox()
+			
+			json.dump(self.user_blacklist, open("blacklist.json", "w"))
+
+		root = tk.Tk()
+		root.title("Stalkbot User Blacklist")
+		
+		entry = tk.Entry(root, width=25)
+		hashtag = tk.Label(root, text="#", font=("Helvetica", 12), anchor="center")
+		entry2 = tk.Entry(root, width=4)
+		add_button = tk.Button(root, text="Add (Name#Discriminator)", font=("Helvetica", 12), command=add)
+		remove_selected_button = tk.Button(root, text="Remove selected", font=("Helvetica", 12), command=remove)
+		listbox = tk.Listbox(root, width=25, height=10)
+		close = tk.Button(root, text="Close", font=("Helvetica", 18), command=root.quit)
+	
+		entry.grid(column=0, row=0)
+		hashtag.grid(column=1, row=0)
+		entry2.grid(column=2, row=0)
+		add_button.grid(column=3, row=0)
+		remove_selected_button.grid(column=3, row=1)
+		listbox.grid(column=0, row=1)
+		close.grid(column=0, row=2)
+		
+		root.mainloop()
+		root.destroy()
 
 	def delete_last_message(self):
 		self.bot.delete_last = True

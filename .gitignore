@@ -3,3 +3,4 @@ cache/
 config.json
 project.geany
 features_toggle.json
+blacklist.json

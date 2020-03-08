@@ -64,6 +64,12 @@ except:
 	features_toggle = {"screenshot": True, "webcam": True, "tts": True, "play": True, "proc": True}
 	json.dump(features_toggle, open("features_toggle.json", "w"))
 
+try:
+	user_blacklist = json.load(open("blacklist.json"))
+except:
+	user_blacklist =  []
+	json.dump(user_blacklist, open("blacklist.json", "w"))
+
 if not os.path.isdir("cache"):
 	os.mkdir("cache")
 
@@ -91,7 +97,7 @@ async def on_message(message):
 	global bot
 	if message.author.id == bot.user.id:
 		bot.last_own_message = message
-	elif not message.author.bot:
+	elif not message.author.bot and not message.author.name + "#" + message.author.discriminator in user_blacklist:
 		await bot.process_commands(message)
 
 bot.last_own_message = None
@@ -106,7 +112,7 @@ bot.add_cog(commands.proc.Proc(bot, config, features_toggle, utils.functions, ti
 bot.loop.create_task(update_status())
 bot.loop.create_task(clear_command_log())
 
-app = utils.gui.App(bot, config, features_toggle, command_log)
+app = utils.gui.App(bot, config, features_toggle, command_log, user_blacklist)
 app.start()
 
 bot.loop.create_task(delete_last_loop())
