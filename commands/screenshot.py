@@ -15,6 +15,11 @@ class Screenshot(commands.Cog):
 		self.functions = functions
 		self.timeouts = timeouts
 		self.command_log = command_log
+		if self.bot.windows:
+			import tkinter as tk
+			window = tk.Tk()
+			self.screensize = (window.winfo_screenwidth(), window.winfo_screenheight())
+			window.destroy()
 		
 	@commands.command(aliases=["ss"])
 	async def screenshot(self, ctx):
@@ -39,7 +44,7 @@ class Screenshot(commands.Cog):
 				img = Image.open("cache/screenshot.png")
 			else:
 				from PIL import ImageGrab
-				img = ImageGrab.grab()
+				img = ImageGrab.grab(bbox=[0, 0, self.screensize[0], self.screensize[1]])
 	
 			img = img.filter(ImageFilter.GaussianBlur(self.config["screenshot_blur"]))
 			img.save("cache/screenshot_blurred.png")
