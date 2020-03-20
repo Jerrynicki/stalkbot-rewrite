@@ -3,7 +3,7 @@ import os
 
 print("Welcome to the Stalkbot installer for Windows!\nLet's install some required pip packages first")
 
-os.system("py -m pip install pygame discord.py Pillow gTTS win10toast requests opencv-python --user")
+os.system("py -m pip install pygame psutil discord.py Pillow gTTS win10toast requests opencv-python --user")
 
 input("Press enter if the installation was successful.")
 
