@@ -12,6 +12,8 @@ play TTS messages and more.
 
 For a stable bot on Windows you can use [Meiyou's Stalkbot](https://github.com/M3IY0U/Stalkbot)
 
+**Currently, pygame's camera module (used for taking webcam photos) doesn't work with Python 3.8, so make sure you install a Python version >=3.6 <3.8**
+
 ### To install (\*nix):
 * Clone the repository `git clone https://gitlab.com/Jerrynicki/stalkbot-rewrite.git` or [download as zip](https://gitlab.com/Jerrynicki/stalkbot-rewrite/-/archive/master/stalkbot-rewrite-master.zip)
 * Run the install.sh file in bash (`bash install.sh`). It will guide you through the installation
