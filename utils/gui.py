@@ -164,6 +164,8 @@ class App():
 		listbox.grid(column=0, row=1)
 		close.grid(column=0, row=2)
 		
+		update_listbox()
+		
 		root.mainloop()
 		root.destroy()
 
