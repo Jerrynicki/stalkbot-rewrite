@@ -68,12 +68,8 @@ class Play(commands.Cog):
 						return
 				file.close()
 			
-			if filename.split(".")[-1] != "wav":
-				result = self.functions.ffmpeg(filename, ["-af", "volume=-25dB,loudnorm=tp=0", "-t", \
-											   str(self.config["max_message_length"]), "-ar", "44100", "-ac", "2"], filename + "_converted.wav")
-			else:
-				filename = ".".join(filename.split(".")[:-1])
-				result = True
+			result = self.functions.ffmpeg(filename, ["-af", "volume=-25dB,loudnorm=tp=0", "-t", \
+										   str(self.config["max_message_length"]), "-ar", "44100", "-ac", "2"], filename + "_converted.wav")
 
 			if result is False:
 				raise Exception("FFmpeg command timed out or returned an error")
