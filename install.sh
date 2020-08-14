@@ -12,6 +12,7 @@ echo "notify-send / libnotify"
 echo "pip3 / python3-pip"
 echo "Tkinter for Python 3 / python3-tk"
 echo "ffmpeg"
+echo "libsdl1.2-dev"
 echo "Please note that they may be named differently on your distribution"
 
 read -p "Press Enter if you have made sure that these packages are installed.  " coolvariable
