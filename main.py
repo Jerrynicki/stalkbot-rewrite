@@ -62,7 +62,7 @@ config = json.load(open("config.json"))
 try:
 	features_toggle = json.load(open("features_toggle.json"))
 except:
-	features_toggle = {"screenshot": True, "webcam": True, "tts": True, "play": True, "proc": True, "flashbang": True, "webcamgif": True}
+	features_toggle = {"screenshot": True, "webcam": True, "tts": True, "play": True, "proc": True, "webcamgif": True}
 	json.dump(features_toggle, open("features_toggle.json", "w"))
 
 try:
@@ -109,7 +109,6 @@ bot.add_cog(commands.tts.TTS(bot, config, features_toggle, utils.functions, time
 bot.add_cog(commands.play.Play(bot, config, features_toggle, utils.functions, timeouts, command_log))
 bot.add_cog(commands.folder.Folder(bot, config, features_toggle, utils.functions, timeouts, command_log))
 bot.add_cog(commands.proc.Proc(bot, config, features_toggle, utils.functions, timeouts, command_log))
-bot.add_cog(commands.flashbang.Flashbang(bot, config, features_toggle, utils.functions, timeouts, command_log))
 
 bot.loop.create_task(update_status())
 bot.loop.create_task(clear_command_log())
