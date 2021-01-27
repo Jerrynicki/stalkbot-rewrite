@@ -7,7 +7,6 @@ to activate your webcam, take (blurred) screenshots, play sounds,
 play TTS messages and more.
 
 * Note: If a new feature was recently added and you're missing the toggle in the control panel for it or it doesn't work,
-
 delete the file "features_toggle.json" and restart the bot.
  
 * If this still doesn't fix the problem, please also try running the installer again.
