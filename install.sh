@@ -4,7 +4,7 @@ echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "Welcome to the Stalkbot installer!"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 
-sleep 3
+read -p "Press Enter to continue." coolvariable
 
 echo "First, please make sure the following packages are installed on your system and on your PATH: "
 echo "scrot"
@@ -25,9 +25,10 @@ pip3 install pygame psutil discord.py Pillow gTTS requests
 echo ""
 echo "Now to set up your bot config."
 echo "The options will be written to the file config.json. You can change them later."
+echo "Please read the explanation for every option carefully."
 echo "All time values are in seconds."
 
-sleep 5
+read -p "Press Enter to continue." coolvariable
 
 read -sp "Please input your bot token (you can get one by creating a bot account at https://discordapp.com/developers): " token
 echo ""
@@ -36,7 +37,15 @@ echo "If you do not know your webcam width/height, just enter 0 for the followin
 read -p "Please input the width of your webcam (px): " cam_width
 read -p "Please input the height of your webcam (px): " cam_height
 
+echo "Please input a smaller width and height of your webcam to be used for the webcam gif command,"
+echo "since the images will be downscaled anyway (for a 3s gif the width will usually be around 400)"
+echo "and most webcams support a higher framerate at lower resolutions"
+echo "Like the normal width and height, you can set this to 0 and the bot will use a default of 320x240"
+read -p "Smaller width (px): " small_cam_width
+read -p "Smaller height (px): " small_cam_height
+
 read -p "Please input the desired delay before taking a picture when the webcam command is used: " webcam_delay
+read -p "Please input the desired length of a webcam gif (seconds): " gif_length
 read -p "Please input the desired amount of blur when taking screenshots: " screenshot_blur
 read -p "Please input the cooldown/timeout for commands: " timeout
 read -p "Please input your desired bot prefix: " prefix
@@ -56,16 +65,17 @@ echo "AUTHOR: COMMAND | SERVER CHANNEL"
 echo "Which would produce the following output when Flexis sends a screenshot command in #bots on Supermarkt:"
 echo "Flexis#1234: Screenshot | Supermarkt #bots"
 
-sleep 3
+echo ""
+read -p "Press Enter to continue." coolvariable
 
 read -p "Please input the desired format for notifications: " notifications_format
 
 read -p "Please input a folder for the folder command: " folder
 
-echo "{\"token\": \"$token\", \"cam_width\": $cam_width, \"cam_height\": $cam_height, \"webcam_delay\": $webcam_delay, \"screenshot_blur\": $screenshot_blur, \"timeout\": $timeout, \"prefix\": \"$prefix\", \"tts_voice\": \"$tts_voice\", \"max_message_length\": $max_message_length, \"notifications_format\": \"$notifications_format\", \"status\": \"$status\", \"folder\": \"$folder\"}" > config.json
+echo "{\"token\": \"$token\", \"cam_width\": $cam_width, \"cam_height\": $cam_height, \"small_cam_width\": $small_cam_width, \"small_cam_height\": $small_cam_height, \"webcam_delay\": $webcam_delay, \"screenshot_blur\": $screenshot_blur, \"timeout\": $timeout, \"prefix\": \"$prefix\", \"tts_voice\": \"$tts_voice\", \"max_message_length\": $max_message_length, \"notifications_format\": \"$notifications_format\", \"status\": \"$status\", \"folder\": \"$folder\", \"gif_length\": $gif_length}" > config.json
 
 echo "Config has been written."
 echo ""
 echo ""
 echo "Thank you for using the Stalkbot installer! You can now start your bot by running python3 main.py"
-sleep 3
+read -p "Press Enter to exit." coolvariable

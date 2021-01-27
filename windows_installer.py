@@ -18,7 +18,17 @@ token = input("Please input your bot token (you can get one by creating a bot ac
 print("If you do not know your webcam width/height, just enter 0 for the following values and the default 320x240 will be used.")
 cam_width = int(input("Please input the width of your webcam (px): "))
 cam_height = int(input("Please input the height of your webcam (px): "))
+
+print("""Please input a smaller width and height of your webcam to be used for the webcam gif command,
+since the images will be downscaled anyway (for a 3s gif the width will usually be around 400)
+and most webcams support a higher framerate at lower resolutions
+Like the normal width and height, you can set this to 0 and the bot will use a default of 320x240""")
+
+small_cam_width = int(input("Smaller width (px): "))
+small_cam_height = int(input("Smaller height (px): "))
+
 webcam_delay = float(input("Please input the desired delay before taking a picture when the webcam command is used: "))
+gif_length = float(input("Please input the desired length of a webcam gif (seconds): "))
 screenshot_blur = float(input("Please input the desired amount of blur when taking screenshots: "))
 timeout = float(input("Please input the cooldown/timeout for commands: "))
 prefix = input("Please input your desired bot prefix: ")
@@ -42,7 +52,7 @@ Flexis#1234: Screenshot | Supermarkt #bots""")
 notifications_format = input("Please input the desired format for notifications: ")
 folder = input("Please input a folder for the folder command: ")
 
-config = {"token": token, "cam_width": cam_width, "cam_height": cam_height, "webcam_delay": webcam_delay, "screenshot_blur": screenshot_blur, "timeout": timeout, "prefix": prefix, "tts_voice": tts_voice, "max_message_length": max_message_length, "status": status, "notifications_format": notifications_format, "folder": folder}
+config = {"token": token, "cam_width": cam_width, "cam_height": cam_height, "small_cam_width": small_cam_width, "small_cam_height": small_cam_height, "webcam_delay": webcam_delay, "screenshot_blur": screenshot_blur, "timeout": timeout, "prefix": prefix, "tts_voice": tts_voice, "max_message_length": max_message_length, "status": status, "notifications_format": notifications_format, "folder": folder, "gif_length": gif_length}
 json.dump(config, open("config.json", "w"))
 
 print("Success! You can now run the bot.")

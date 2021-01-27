@@ -43,6 +43,14 @@ def ffmpeg(inputf, args, outputf):
 		print(exc)
 		return False
 
+def ffmpeg2(args):
+	try:
+		subprocess.run([ffmpeg_binary, *(args.split(" "))], check=True, timeout=20)
+		return True
+	except Exception as exc:
+		print(exc)
+		return False
+
 def notification(fmt, command, ctx):
 	text = fmt
 	text = text.replace("AUTHOR", ctx.message.author.name + "#" + ctx.message.author.discriminator)

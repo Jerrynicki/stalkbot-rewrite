@@ -1,6 +1,8 @@
 token
 cam_width
 cam_height
+small_cam_width
+small_cam_height
 webcam_delay
 screenshot_blur
 timeout
@@ -9,3 +11,4 @@ tts_voice=german
 max_message_length
 notifications_format="AUTHOR: COMMAND | SERVER CHANNEL"
 folder
+gif_length
