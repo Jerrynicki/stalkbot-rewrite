@@ -6,13 +6,15 @@ to activate your webcam, take (blurred) screenshots, play sounds,
 
 play TTS messages and more.
 
-* Note: If a new feature was recently added and you're missing the toggle in the control panel for it, delete the file "features_toggle.json" and restart the bot
+* Note: If a new feature was recently added and you're missing the toggle in the control panel for it or it doesn't work,
+
+delete the file "features_toggle.json" and restart the bot.
+ 
+* If this still doesn't fix the problem, please also try running the installer again.
 
 ### Cross-platform, although Windows support is still WIP
 
-For a stable bot on Windows you can use [Meiyou's Stalkbot](https://github.com/M3IY0U/Stalkbot)
-
-**Currently, pygame's camera module (used for taking webcam photos) doesn't work with Python 3.8, so make sure you install a Python version >=3.6 <3.8**
+For a stable bot for Windows and other alternatives, see bottom of this page
 
 ### To install (\*nix):
 * Clone the repository `git clone https://gitlab.com/Jerrynicki/stalkbot-rewrite.git` or [download as zip](https://gitlab.com/Jerrynicki/stalkbot-rewrite/-/archive/master/stalkbot-rewrite-master.zip)
@@ -25,7 +27,7 @@ For a stable bot on Windows you can use [Meiyou's Stalkbot](https://github.com/M
 * Navigate to the folder you put the repository in and double-click the windows_installer.py file to guide you through the installation
 * After installing you can double-click the main.py to start the bot
 
-If you need help creating a bot account/getting a token, please refer to [this guide](https://discordpy.readthedocs.io/en/latest/discord.html)
+**If you need help creating a bot account/getting a token, please refer to [this guide](https://discordpy.readthedocs.io/en/latest/discord.html)**
 
 ### **In development!**
 
@@ -47,6 +49,12 @@ If you need help creating a bot account/getting a token, please refer to [this g
 
 * ~~Add a command log and a user blacklist~~
 
-Original bot with bad code at https://github.com/Jerrynicki/Stalkbot
+### Alternatives:
+
+[Meiyou's Stalkbot](https://github.com/M3IY0U/Stalkbot) (Windows, deprecated)
+[Meiyou's StalkbotGUI](https://github.com/M3IY0U/StalkbotGUI) (Windows)
+[TheLastZombie's Watchdog](https://github.com/TheLastZombie/Watchdog) (Cross-platform)
+
+Original bot with even worse code at https://github.com/Jerrynicki/Stalkbot
 
 *Licensed under the Modified BSD license. See the LICENSE.md file for more information.*
