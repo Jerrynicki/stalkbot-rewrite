@@ -50,9 +50,11 @@ For a stable bot for Windows and other alternatives, see bottom of this page
 
 ### Alternatives:
 
-[Meiyou's Stalkbot](https://github.com/M3IY0U/Stalkbot) (Windows, deprecated)
-[Meiyou's StalkbotGUI](https://github.com/M3IY0U/StalkbotGUI) (Windows)
-[TheLastZombie's Watchdog](https://github.com/TheLastZombie/Watchdog) (Cross-platform)
+* [Meiyou's Stalkbot](https://github.com/M3IY0U/Stalkbot) (Windows, deprecated)
+
+* [Meiyou's StalkbotGUI](https://github.com/M3IY0U/StalkbotGUI) (Windows)
+
+* [TheLastZombie's Watchdog](https://github.com/TheLastZombie/Watchdog) (Cross-platform)
 
 Original bot with even worse code at https://github.com/Jerrynicki/Stalkbot
 
