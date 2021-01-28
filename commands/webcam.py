@@ -102,7 +102,7 @@ class Webcam(commands.Cog):
 			# 8 mb / (byte per pixel width per frames * frames)
 			# 200 bytes per pixel width is a very rough estimate but it works well enough and
 			# i dont really care as long as it works
-			width = int(8*1024*1024 / (200 * len(images)))
+			width = int(8*1024*1024 / (300 * len(images)))
 			print(width)
 				
 			ffmpeg_args = "-y -framerate " + str(int(len(images) / self.config["gif_length"])) + " -i cache/webcamgif%d.png -vf scale=" + str(width) + ":-1 cache/funny.gif"
