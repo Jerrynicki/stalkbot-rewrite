@@ -102,14 +102,14 @@ class Webcam(commands.Cog):
 			cam.stop()
 				
 			for i in range(len(images)):
-				pygame.image.save(images[i], "cache/webcamgif" + str(i) + ".png")
+				pygame.image.save(images[i], "cache/webcamgif" + str(i) + ".jpg")
 
 			if self.config["gif_length"] < 16:
 				bitrate = 1000
 			else:
 				bitrate = 2*8*1024 / self.config["gif_length"]
 				
-			ffmpeg_args = "-y -framerate " + str(int(len(images) / self.config["gif_length"] * float(speed))) + " -i cache/webcamgif%d.png -c:a libvpx-vp9 -an -b:v " + str(bitrate) + "k -pix_fmt yuv420p -row-mt 1 -threads 2 cache/funny.webm"
+			ffmpeg_args = "-y -framerate " + str(int(len(images) / self.config["gif_length"] * float(speed))) + " -i cache/webcamgif%d.jpg -c:a libvpx-vp9 -an -b:v " + str(bitrate) + "k -pix_fmt yuv420p -row-mt 1 -threads 2 cache/funny.webm"
 			
 			if self.functions.ffmpeg2(ffmpeg_args):
 				await ctx.message.remove_reaction(self.bot.emoji.repeat_button, ctx.message.guild.me)
@@ -118,7 +118,7 @@ class Webcam(commands.Cog):
 				await ctx.send(content="", file=discord.File("cache/funny.webm"))
 				os.unlink("cache/funny.webm")
 				for i in range(len(images)):
-					os.unlink("cache/webcamgif" + str(i) + ".png")
+					os.unlink("cache/webcamgif" + str(i) + ".jpg")
 			
 			await ctx.message.remove_reaction(self.bot.emoji.outbox_tray, ctx.message.guild.me)
 			await ctx.message.add_reaction(self.bot.emoji.check_mark)
