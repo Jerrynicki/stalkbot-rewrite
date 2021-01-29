@@ -60,7 +60,7 @@ class Webcam(commands.Cog):
 			await ctx.send("Error! " + str(type(exc)) + " " + str(exc))
 
 	@commands.command(aliases=["wcgif","gif"])
-	async def webcamgif(self, ctx):
+	async def webcamgif(self, ctx, speed=1.0):
 		if self.timeouts.is_timeout("webcamgif"):
 			await ctx.message.add_reaction(self.bot.emoji.hourglass)
 			return
@@ -72,6 +72,11 @@ class Webcam(commands.Cog):
 			return
 		
 		try:
+			if speed < 0.25 or speed > 10:
+				await ctx.message.add_reaction("🇳")
+				await ctx.message.add_reaction("🇴")
+				return
+			
 			self.functions.notification(self.config["notifications_format"], "Webcam GIF", ctx)
 			await self.functions.warning_sound()
 			self.command_log.append((time.time(), ctx, "Webcam GIF"))
@@ -105,7 +110,7 @@ class Webcam(commands.Cog):
 			width = int(8*1024*1024 / (300 * len(images)))
 			print(width)
 				
-			ffmpeg_args = "-y -framerate " + str(int(len(images) / self.config["gif_length"])) + " -i cache/webcamgif%d.png -vf scale=" + str(width) + ":-1 cache/funny.gif"
+			ffmpeg_args = "-y -framerate " + str(int(len(images) / self.config["gif_length"])) + " -i cache/webcamgif%d.png -vf scale=" + str(width) + ":-1,setpts=PTS*" + str(1/float(speed)) + " cache/funny.gif"
 			
 			if self.functions.ffmpeg2(ffmpeg_args):
 				await ctx.message.remove_reaction(self.bot.emoji.repeat_button, ctx.message.guild.me)
