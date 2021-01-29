@@ -104,20 +104,19 @@ class Webcam(commands.Cog):
 			for i in range(len(images)):
 				pygame.image.save(images[i], "cache/webcamgif" + str(i) + ".png")
 
-			# 8 mb / (byte per pixel width per frames * frames)
-			# 200 bytes per pixel width is a very rough estimate but it works well enough and
-			# i dont really care as long as it works
-			width = int(8*1024*1024 / (300 * len(images)))
-			print(width)
+			if self.config["gif_length"] < 16:
+				bitrate = 1000
+			else:
+				bitrate = 2*8*1024 / self.config["gif_length"]
 				
-			ffmpeg_args = "-y -framerate " + str(int(len(images) / self.config["gif_length"])) + " -i cache/webcamgif%d.png -vf scale=" + str(width) + ":-1,setpts=PTS*" + str(1/float(speed)) + " cache/funny.gif"
+			ffmpeg_args = "-y -framerate " + str(int(len(images) / self.config["gif_length"] * float(speed))) + " -i cache/webcamgif%d.png -c:a libvpx-vp9 -an -b:v " + str(bitrate) + "k -pix_fmt yuv420p -row-mt 1 -threads 2 cache/funny.webm"
 			
 			if self.functions.ffmpeg2(ffmpeg_args):
 				await ctx.message.remove_reaction(self.bot.emoji.repeat_button, ctx.message.guild.me)
 				await ctx.message.add_reaction(self.bot.emoji.outbox_tray)
 			
-				await ctx.send(content="", file=discord.File("cache/funny.gif"))
-				os.unlink("cache/funny.gif")
+				await ctx.send(content="", file=discord.File("cache/funny.webm"))
+				os.unlink("cache/funny.webm")
 				for i in range(len(images)):
 					os.unlink("cache/webcamgif" + str(i) + ".png")
 			
